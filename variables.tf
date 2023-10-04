@@ -6,7 +6,7 @@ variable "region" {
 variable "vpc_name" {
   type        = string
   description = "name of the vpc to be created"
-  default     = "platformwale"
+  default     = "eks-cluster"
 }
 
 variable "vpc_cidr" {
@@ -18,11 +18,15 @@ variable "vpc_cidr" {
 variable "cluster_name" {
   type        = string
   description = "eks cluster name"
-  default     = "platformwale"
+  default     = "eks-cluster"
 }
 
 variable "k8s_version" {
   type        = string
   description = "k8s version"
   default     = "1.27"
+}
+variable "profile" {
+  type        = string
+  description = "profile"
 }

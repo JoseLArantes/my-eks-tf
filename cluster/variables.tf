@@ -1,7 +1,7 @@
 variable "vpc_name" {
   type        = string
   description = "name of the vpc to be created"
-  default     = "platformwale"
+  default     = "eks-cluster"
 }
 
 variable "vpc_cidr" {

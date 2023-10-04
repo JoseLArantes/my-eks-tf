@@ -33,8 +33,8 @@ variable "workers_config" {
       max_size     = 2
       desired_size = 1
 
-      instance_types = ["t3.large"]
-      capacity_type  = "SPOT"
+      instance_types = ["t3.micro"]
+      # capacity_type  = "SPOT"
     }
   }
 }
