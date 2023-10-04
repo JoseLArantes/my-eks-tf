@@ -21,16 +21,12 @@ provider "aws" {
   # }
 
 }
-
-# invoke cluster module which creates vpc, subnets and eks cluter
 module "cluster" {
   source = "./cluster"
 
-  # vpc details
   vpc_name = var.vpc_name
   vpc_cidr = var.vpc_cidr
 
-  # eks details
   eks_cluster_name = var.cluster_name
   k8s_version      = var.k8s_version
 }
