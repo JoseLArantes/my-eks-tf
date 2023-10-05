@@ -80,11 +80,16 @@ variable "cluster_arn" {
 variable "enable_admin" {
   description = "Determines whether an IAM role policy is created to grant admin access to the Kubernetes cluster"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "admin_policy_name" {
   description = "Name to use on admin IAM policy created"
   type        = string
   default     = ""
+}
+variable "tags" {
+  description = "A map of tags to add to all AWS resources"
+  type        = map(string)
+  default     = {}
 }

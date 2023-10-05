@@ -22,3 +22,14 @@ module "eks_with_node_group" {
   eks_node_groups_subnet_ids = module.vpc_with_subnets.private_subnets
   control_plane_subnet_ids   = module.vpc_with_subnets.private_subnets
 }
+module "iam" {
+  # invoke eks module under modules directory
+  source = "../modules/iam"
+
+  # passing the required parameters
+  cluster_arn = module.eks_with_node_group.cluster_arn
+  iam_role_name = module.eks_with_node_group.cluster_name
+  admin_policy_name = module.eks_with_node_group.cluster_name
+  tags = {terraform = true}
+
+}

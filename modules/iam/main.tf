@@ -2,8 +2,8 @@ locals {
   admin_policy_name = coalesce(var.admin_policy_name, local.iam_role_name)
 
   arn_base = join(":", slice(split(":", var.cluster_arn), 0, 5))
+  iam_role_name = coalesce(var.iam_role_name, var.iam_role_name)
 }
-
 data "aws_iam_policy_document" "admin" {
   count = var.create_iam_role && var.enable_admin ? 1 : 0
 
