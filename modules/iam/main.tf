@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "admin" {
       "eks:ListUpdates",
       "eks:ListAddons"
     ]
-    resources = "*"
+    resources = ["*"]
   }
 
   statement {
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "admin" {
       "eks:DescribeCluster",
       "eks:DescribeAddon"
     ]
-    resources = "*"
+    resources = ["*"]
   }
 }
 
