@@ -5,8 +5,6 @@ locals {
   iam_role_name = coalesce(var.iam_role_name, var.iam_role_name)
 }
 data "aws_iam_policy_document" "admin" {
-  count = var.create_iam_role && var.enable_admin ? 1 : 0
-
   statement {
     sid = "List"
     actions = [
@@ -53,27 +51,23 @@ data "aws_iam_policy_document" "admin" {
 }
 
 resource "aws_iam_policy" "admin" {
-  count = var.create_iam_role && var.enable_admin ? 1 : 0
-
   name        = var.iam_role_use_name_prefix ? null : local.admin_policy_name
   name_prefix = var.iam_role_use_name_prefix ? "${local.admin_policy_name}-" : null
   path        = var.iam_role_path
   description = var.iam_role_description
 
-  policy = data.aws_iam_policy_document.admin[0].json
+  policy = data.aws_iam_policy_document.admin.json
 
   tags = var.tags
 }
 
 resource "aws_iam_role" "this" {
-  count = var.create_iam_role ? 1 : 0
-
   name        = var.iam_role_use_name_prefix ? null : local.iam_role_name
   name_prefix = var.iam_role_use_name_prefix ? "${local.iam_role_name}-" : null
   path        = var.iam_role_path
   description = var.iam_role_description
 
-  assume_role_policy    = data.aws_iam_policy_document.this[0].json
+  assume_role_policy    = data.aws_iam_policy_document.this.json
   max_session_duration  = var.iam_role_max_session_duration
   permissions_boundary  = var.iam_role_permissions_boundary
   force_detach_policies = true
@@ -82,10 +76,8 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
-  count = var.create_iam_role && var.enable_admin ? 1 : 0
-
-  policy_arn = aws_iam_policy.admin[0].arn
-  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.admin.arn
+  role       = aws_iam_role.this.name
 }
 
 variable "admin_policy_name" {
