@@ -1,7 +1,7 @@
 locals {
   admin_policy_name = coalesce(var.admin_policy_name, local.iam_role_name)
 
-  arn_base = join(":", slice(split(":", var.cluster_arn), 0, 5))
+  arn_base      = join(":", slice(split(":", var.cluster_arn), 0, 5))
   iam_role_name = coalesce(var.iam_role_name, var.iam_role_name)
 }
 data "aws_iam_policy_document" "admin" {
@@ -15,8 +15,8 @@ data "aws_iam_policy_document" "admin" {
     ]
     resources = [
       var.cluster_arn,
-      "${local.arn_base}:nodegroup/*/*/*",
-      "${local.arn_base}:addon/*/*/*",
+      "arn:aws:eks:us-east-1:033848016404:cluster:nodegroup/*/*/*",
+      "arn:aws:eks:us-east-1:033848016404:cluster:addon/*/*/*",
     ]
   }
 
@@ -43,9 +43,9 @@ data "aws_iam_policy_document" "admin" {
     ]
     resources = [
       var.cluster_arn,
-      "${local.arn_base}:fargateprofile/*/*/*",
-      "${local.arn_base}:nodegroup/*/*/*",
-      "${local.arn_base}:addon/*/*/*",
+      "arn:aws:eks:us-east-1:033848016404:cluster:fargateprofile/*/*/*",
+      "arn:aws:eks:us-east-1:033848016404:cluster:nodegroup/*/*/*",
+      "arn:aws:eks:us-east-1:033848016404:cluster:addon/*/*/*",
     ]
   }
 }
