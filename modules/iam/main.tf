@@ -67,7 +67,7 @@ resource "aws_iam_role" "this" {
   path        = var.iam_role_path
   description = var.iam_role_description
 
-  assume_role_policy    = data.aws_iam_policy_document.this.json
+  assume_role_policy    = data.aws_iam_policy_document.admin.json
   max_session_duration  = var.iam_role_max_session_duration
   permissions_boundary  = var.iam_role_permissions_boundary
   force_detach_policies = true
