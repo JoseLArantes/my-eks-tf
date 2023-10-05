@@ -65,6 +65,22 @@ resource "aws_iam_policy" "admin" {
   tags = var.tags
 }
 
+resource "aws_iam_role" "this" {
+  count = var.create_iam_role ? 1 : 0
+
+  name        = var.iam_role_use_name_prefix ? null : local.iam_role_name
+  name_prefix = var.iam_role_use_name_prefix ? "${local.iam_role_name}-" : null
+  path        = var.iam_role_path
+  description = var.iam_role_description
+
+  assume_role_policy    = data.aws_iam_policy_document.this[0].json
+  max_session_duration  = var.iam_role_max_session_duration
+  permissions_boundary  = var.iam_role_permissions_boundary
+  force_detach_policies = true
+
+  tags = var.tags
+}
+
 resource "aws_iam_role_policy_attachment" "admin" {
   count = var.create_iam_role && var.enable_admin ? 1 : 0
 
