@@ -13,11 +13,7 @@ data "aws_iam_policy_document" "admin" {
       "eks:ListUpdates",
       "eks:ListAddons"
     ]
-    resources = [
-      var.cluster_arn,
-      "arn:aws:eks:us-east-1:033848016404:cluster:nodegroup/*/*/*",
-      "arn:aws:eks:us-east-1:033848016404:cluster:addon/*/*/*",
-    ]
+    resources = "*"
   }
 
   statement {
@@ -41,12 +37,7 @@ data "aws_iam_policy_document" "admin" {
       "eks:DescribeCluster",
       "eks:DescribeAddon"
     ]
-    resources = [
-      var.cluster_arn,
-      "arn:aws:eks:us-east-1:033848016404:cluster:fargateprofile/*/*/*",
-      "arn:aws:eks:us-east-1:033848016404:cluster:nodegroup/*/*/*",
-      "arn:aws:eks:us-east-1:033848016404:cluster:addon/*/*/*",
-    ]
+    resources = "*"
   }
 }
 
