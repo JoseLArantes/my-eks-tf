@@ -28,8 +28,8 @@ module "iam" {
 
   # passing the required parameters
   cluster_arn = module.eks_with_node_group.cluster_arn
-  iam_role_name = module.eks_with_node_group.cluster_name
-  admin_policy_name = module.eks_with_node_group.cluster_name
+  iam_role_name = var.eks_cluster_name
+  admin_policy_name = var.eks_cluster_name
   tags = {terraform = true}
 
 }
