@@ -71,23 +71,12 @@ variable "oidc_provider_arn" {
   default     = ""
 }
 
-variable "cluster_arn" {
-  description = "The Amazon Resource Name (ARN) of the cluster"
-  type        = string
-  default     = ""
-}
-
 variable "enable_admin" {
   description = "Determines whether an IAM role policy is created to grant admin access to the Kubernetes cluster"
   type        = bool
   default     = true
 }
 
-variable "admin_policy_name" {
-  description = "Name to use on admin IAM policy created"
-  type        = string
-  default     = ""
-}
 variable "tags" {
   description = "A map of tags to add to all AWS resources"
   type        = map(string)
